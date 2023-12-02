@@ -1,28 +1,52 @@
 <html>
 <head>
     <title>4••••</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <style>
+        body{
+            background-color: black;
+        }
+    </style>
 
     <link rel="stylesheet" href="stylesheet.css" type="text/css">
 
 </head>
     <body>
-
             <div class="heading">
 
         <h1 style="margin: 5%">4••••point perspective</h1>
         <br><br>
-        <p><strong><u>Newsletters</u></strong></p>
-        <form>
-            <label><i>sign up for our newsletters, with summary, further information and APA citations in your inbox.</i></label>
-            <br>
-            <input type="email" placeholder="your email.." required>
+        <h3><strong><u>newsletters</u></strong></h3>
+        <p><i>sign up for our newsletters, with summary, further information and APA citations in your inbox.</i></p>
+        <form name="submit-to-google-sheet">
+            <input type="email" name="Email" placeholder="your email.." required>
             <button type="submit">submit</button>
+        </form>
+        <span id="msg"></span>
             </div>
 
-        </form>
+            <script>
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbzgissJf9fEHChNlETW8uHmEVEMZ8sK8yJ7IvirOeLCPsGo1Zs8TO8lEVWOMC9VHCeGtQ/exec'
+                const form = document.forms['submit-to-google-sheet']
+                const msg = document.getElementById("msg")
+              
+                form.addEventListener('submit', e => {
+                  e.preventDefault()
+                  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    .then(response => {
+                        msg.innerHTML = "cheers!"
+                        setTimeout(function(){
+                            msg.innerHTML = ""
+                        },5000)
+                        form.reset()
+                    })
+                    .catch(error => console.error('Error!', error.message))
+                })
+              </script>
 
         <br>
-        <table>
+            <div class="list">
+        <table style="color: lavender;">
             <tr>
                 <th>Episode No</th>
                 <th>Title</th>
@@ -39,11 +63,10 @@
                 <td>31:23</td>
             </tr>
         </table>
-        
             <br>
         <h2>art / science / more,</h2>
         <a href="https://www.instagram.com/4.point.perspective/">instagram</a>
-        <hr>
+           </div>
 
     </body>
 </html>
